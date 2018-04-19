@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: web-code-generate
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: shizhen
+Implementation-Vendor-Id: com.stone.cloud
+Build-Jdk: 1.8.0_51
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/xrs/web-code-generate
+Created-By: Maven Integration for Eclipse
+
