@@ -6,6 +6,16 @@ import java.util.Date;
 import java.math.BigDecimal;
 #end
 
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableLogic;
+import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.annotations.Version;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * ${comments}
@@ -14,28 +24,28 @@ import java.math.BigDecimal;
  * @email ${email}
  * @date ${datetime}
  */
-public class ${className}Entity implements Serializable {
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
+@TableName("${tableName}")
+public class ${className}DO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 #foreach ($column in $columns)
-	/**
-	 * ${column.comments}
-	 */
+		/**
+		 * ${column.comments}
+		 */
+	#if($column.attrname ==  'delFlag')  
+	@TableLogic
+	#elseif($column.attrname ==  'version') 
+	@Version 
+	#elseif($column.attrname ==  'updateTime')  
+	@TableField(update = "now()")
+	#end 
 	private $column.attrType $column.attrname;
+	
 #end
 
-#foreach ($column in $columns)
-	/**
-	 * 设置：${column.comments}
-	 */
-	public void set${column.attrName}($column.attrType $column.attrname) {
-		this.$column.attrname = $column.attrname;
-	}
-	/**
-	 * 获取：${column.comments}
-	 */
-	public $column.attrType get${column.attrName}() {
-		return $column.attrname;
-	}
-#end
 }
