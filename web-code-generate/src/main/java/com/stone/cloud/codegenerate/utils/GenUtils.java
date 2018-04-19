@@ -34,7 +34,7 @@ public class GenUtils {
         List<String> templates = new ArrayList<String>();
         templates.add("template/Entity.java.vm");
         templates.add("template/Mapper.java.vm");
-        templates.add("template/Dao.xml.vm");
+        templates.add("template/Mapper.xml.vm");
         templates.add("template/Service.java.vm");
         templates.add("template/ServiceImpl.java.vm");
         templates.add("template/Controller.java.vm");
@@ -198,7 +198,7 @@ public class GenUtils {
             return packagePath + "controller" + File.separator + className + "Controller.java";
         }
 
-        if (template.contains("Dao.xml.vm" )) {
+        if (template.contains("Mapper.xml.vm" )) {
             return "main" + File.separator + "resources" + File.separator + "mapper" + File.separator + moduleName + File.separator + className + "Mapper.xml";
         }
 
