@@ -1,0 +1,12 @@
+# Tomcat
+server:
+    port: 8081
+
+# mysql
+spring:
+    datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/renren_fast?useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: 

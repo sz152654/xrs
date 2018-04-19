@@ -1,0 +1,15 @@
+# Tomcat
+server:
+    port: 80
+
+# mysql
+spring: 
+    profiles:
+      active: test
+    datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://mysql_mysql_1:3306/wlglobal_admin?useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: I$wkV3U1
+

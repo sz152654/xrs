@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.stone.cloud.codegenerate.dao.CodeConfigDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+	<resultMap type="com.stone.cloud.codegenerate.entity.CodeConfigEntity"
+		id="codeConfigMap">
+		<result property="id" column="id" />
+		<result property="mainPath" column="main_path" />
+		<result property="packageName" column="package_name" />
+		<result property="moduleName" column="module_name" />
+		<result property="author" column="author" />
+		<result property="email" column="email" />
+		<result property="tablePrefix" column="table_prefix" />
+	</resultMap>
+
+	<select id="queryObject" resultMap="codeConfigMap">
+		select * from code_config
+		where id = #{value}
+	</select>
+
+	<select id="queryList" resultMap="codeConfigMap">
+		select * from code_config
+		<choose>
+			<when test="sidx != null and sidx.trim() != ''">
+				order by ${sidx} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="queryTotal" resultType="int">
+		select count(*) from
+		code_config
+	</select>
+
+	<insert id="save" parameterType="com.stone.cloud.codegenerate.entity.CodeConfigEntity"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into code_config
+		(
+		`main_path`,
+		`package_name`,
+		`module_name`,
+		`author`,
+		`email`,
+		`table_prefix`
+		)
+		values
+		(
+		#{mainPath},
+		#{packageName},
+		#{moduleName},
+		#{author},
+		#{email},
+		#{tablePrefix}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.stone.cloud.codegenerate.entity.CodeConfigEntity">
+		update code_config
+		<set>
+			<if test="mainPath != null">`main_path` = #{mainPath}, </if>
+			<if test="packageName != null">`package_name` = #{packageName}, </if>
+			<if test="moduleName != null">`module_name` = #{moduleName}, </if>
+			<if test="author != null">`author` = #{author}, </if>
+			<if test="email != null">`email` = #{email}, </if>
+			<if test="tablePrefix != null">`table_prefix` = #{tablePrefix}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="delete">
+		delete from code_config where id = #{value}
+	</delete>
+
+	<delete id="deleteBatch">
+		delete from code_config where id in
+		<foreach item="id" collection="array" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+
+
+	<select id="codeConfig" resultMap="codeConfigMap">
+		select * from code_config
+		limit 1
+	</select>
+</mapper>
